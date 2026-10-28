@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><title>Courtly</title></head>
+<body>
+  <h1>Discover fields (placeholder)</h1>
+  <p id="who"></p>
+  <button id="logout">Log out</button>
+  <script type="module">
+    import { requireAuth, logout } from '/js/utils/guard.js';
+    import { getMe } from '/js/api/auth.api.js';
+    requireAuth();
+    getMe().then(({ user }) => { document.getElementById('who').textContent = `Logged in as ${user.fullName} (${user.role})`; })
+           .catch(logout);
+    document.getElementById('logout').onclick = logout;
+  </script>
+</body>
+</html>
